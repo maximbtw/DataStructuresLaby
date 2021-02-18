@@ -11,8 +11,9 @@ namespace DataStructuresLaby
             //Задание 1
             Console.WriteLine("Hello World!");
             //Задание 2
-            var matrix = new Matrix();
+            var matrix = new Matrix(10, 10);
             matrix.Create(7);
+            Console.WriteLine(matrix.ToString());
             //Задание 3
             var array = CreateArray(50000);
 
