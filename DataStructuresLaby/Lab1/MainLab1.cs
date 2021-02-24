@@ -20,7 +20,7 @@ namespace DataStructuresLaby
 
             timer.SortingTime(matrix.Clone(), Array.Sort, "Встроенная");
             timer.SortingTime(matrix.Clone(), SortingArray.ChoiceSort, "Выбора");
-            timer.SortingTime(matrix.Clone(), SortingArray.InsertSort, "Вставка");
+            timer.SortingTime(matrix.Clone(), SortingArray.InsertionSort, "Вставка");
             timer.SortingTime(matrix.Clone(), SortingArray.ExchangeSort, "Обмена");
             timer.SortingTime(matrix.Clone(), SortingArray.ShellSort, "Шелла");
             timer.SortingTime(matrix.Clone(), SortingArray.PyramidSort, "Пирамидальная");
