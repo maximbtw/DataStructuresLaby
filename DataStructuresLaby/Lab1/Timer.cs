@@ -9,14 +9,15 @@ namespace DataStructuresLaby
         /// Засекает время сортировки
         /// </summary>
         /// <param name="array"></param>
-        /// <param name="method"></param>
+        /// <param name="sortingMethod"></param>
         /// <param name="methodName"></param>
-        public void SortingTime(int[] array, Action<int[]> method, string methodName)
+        public void SortingTime(Matrix matrix, Action<int[]> sortingMethod, string methodName)
         {
             var time = new Stopwatch();
 
             time.Start();
-            method(array);
+            foreach (var line in matrix.Value)
+                sortingMethod(line);
             time.Stop();
 
             var timeSortMethod = time.Elapsed.TotalMilliseconds;

@@ -4,7 +4,7 @@ namespace DataStructuresLaby
 {
     public class Matrix
     {
-        public int[,] Value { get; private set; }
+        public int[][] Value { get; private set; }
 
         private int m;
         private int n;
@@ -20,7 +20,7 @@ namespace DataStructuresLaby
             this.minLimit = minLimit;
             this.maxLimit = maxLimit;
 
-            Value = new int[n, m];
+            Value = new int[n][];
         }
 
         /// <summary>
@@ -32,26 +32,52 @@ namespace DataStructuresLaby
             rnd = new Random();
             maxLimit += variant;
 
-            for (int i = 0; i < Value.GetLength(0); i++)
-                for (int j = 0; j < Value.GetLength(1); j++)
-                    Value[i, j] = rnd.Next(minLimit, maxLimit);
+            for (int i = 0; i < Value.Length; i++)
+            {
+                Value[i] = new int[m];
+                for (int j = 0; j < Value[i].Length ; j++)
+                    Value[i][j] = rnd.Next(minLimit, maxLimit);
+            }
         }
 
         public override string ToString()
         {
             var message = string.Empty;
 
-            for (int i = 0; i < Value.GetLength(0); i++) 
+            foreach (var line in Value)
             {
-                for (int j = 0; j < Value.GetLength(1); j++)
+                foreach (var cell in line)
                 {
-                    string item = Value[i, j].ToString();
+                    string item = cell.ToString();
                     while (item.Length < 5) item += " ";
                     message += item;
                 }
                 message += "\n";
             }
             return message;
+        }
+
+        /// <summary>
+        /// Создает копию матрицы, на основе родителя
+        /// (матрица является ссылочным типом)
+        /// </summary>
+        /// <returns></returns>
+        public Matrix Clone()
+        {
+            Matrix matrixClone = new Matrix(m, n, minLimit, maxLimit);
+            matrixClone.FillValue(this);
+
+            return matrixClone;
+        }
+
+        private void FillValue(Matrix parent)
+        {
+            for (int i = 0; i < Value.Length; i++)
+            {
+                Value[i] = new int[m];
+                for (int j = 0; j < Value[i].Length; j++)
+                    Value[i][j] = parent.Value[i][j];
+            }
         }
     }
 }
