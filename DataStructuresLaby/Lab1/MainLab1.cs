@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 
 namespace DataStructuresLaby
 {
@@ -25,6 +23,7 @@ namespace DataStructuresLaby
             timer.SortingTime(matrix.Clone(), SortingArray.ShellSort, "Шелла");
             timer.SortingTime(matrix.Clone(), SortingArray.PyramidSort, "Пирамидальная");
             timer.SortingTime(matrix.Clone(), SortingArray.QuickSort, "Быстрая сортировка");
+            timer.SortingTime(matrix.Clone(), SortingArray.Tournament, "Турнирная сортировка");
         }
     }
 }

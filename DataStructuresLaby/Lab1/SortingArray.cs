@@ -1,4 +1,8 @@
-﻿namespace DataStructuresLaby
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace DataStructuresLaby
 {
     class SortingArray
     {
@@ -158,6 +162,56 @@
             Swap(ref array[pivot], ref array[maxIndex]);
 
             return pivot;
+        }
+
+        /// <summary>
+        /// Метод турнирной сортировки
+        /// </summary>
+        /// <param name="array"></param>
+        public static void Tournament(int[] array)
+        {
+            var three = new int[2 * (array.Length + array.Length % 2)][];
+            var index = three.Length - array.Length + array.Length % 2;
+
+            for (int i = index; i < three.Length; i++)
+                three[i] = new int[] { i - index, array[i - index] };
+
+            for (int j = 0; j < array.Length; j++)
+            {
+                var n = array.Length;
+                index = three.Length - array.Length + array.Length % 2;
+
+                while (index > -1)
+                {
+                    n = (n + 1) / 2;
+
+                    for (int i = 0; i < n; i++)
+                    {
+                        var iCopy = Math.Max(index + i * 2, 1);
+                        if (three[iCopy] != null && three[iCopy + 1] != null)
+                        {
+                            if (three[iCopy][1] < three[iCopy + 1][1])
+                            {
+                                three[iCopy / 2] = three[iCopy];
+                            }
+                            else
+                            {
+                                three[iCopy / 2] = three[iCopy + 1];
+                            }
+                        }
+                        else
+                        {
+                            three[iCopy / 2] = (three[iCopy] != null) ? three[iCopy] : three[iCopy + 1];
+                        }
+                    }
+                    index -= n;
+                }
+
+                index = three[0][0];
+                var x = three[0][1];
+                array[j] = x;
+                three[three.Length - array.Length - array.Length % 2 + index] = null;
+            }
         }
     }
 }
