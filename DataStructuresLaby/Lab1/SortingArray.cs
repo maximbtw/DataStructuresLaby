@@ -170,16 +170,16 @@ namespace DataStructuresLaby
         /// <param name="array"></param>
         public static void Tournament(int[] array)
         {
-            var three = new int[2 * (array.Length + array.Length % 2)][];
-            var index = three.Length - array.Length + array.Length % 2;
+            var tree = new int[2 * (array.Length + array.Length % 2)][];
+            var index = tree.Length - array.Length + array.Length % 2;
 
-            for (int i = index; i < three.Length; i++)
-                three[i] = new int[] { i - index, array[i - index] };
+            for (int i = index; i < tree.Length; i++)
+                tree[i] = new int[] { i - index, array[i - index] };
 
             for (int j = 0; j < array.Length; j++)
             {
                 var n = array.Length;
-                index = three.Length - array.Length + array.Length % 2;
+                index = tree.Length - array.Length + array.Length % 2;
 
                 while (index > -1)
                 {
@@ -188,29 +188,29 @@ namespace DataStructuresLaby
                     for (int i = 0; i < n; i++)
                     {
                         var iCopy = Math.Max(index + i * 2, 1);
-                        if (three[iCopy] != null && three[iCopy + 1] != null)
+                        if (tree[iCopy] != null && tree[iCopy + 1] != null)
                         {
-                            if (three[iCopy][1] < three[iCopy + 1][1])
+                            if (tree[iCopy][1] < tree[iCopy + 1][1])
                             {
-                                three[iCopy / 2] = three[iCopy];
+                                tree[iCopy / 2] = tree[iCopy];
                             }
                             else
                             {
-                                three[iCopy / 2] = three[iCopy + 1];
+                                tree[iCopy / 2] = tree[iCopy + 1];
                             }
                         }
                         else
                         {
-                            three[iCopy / 2] = (three[iCopy] != null) ? three[iCopy] : three[iCopy + 1];
+                            tree[iCopy / 2] = (tree[iCopy] != null) ? tree[iCopy] : tree[iCopy + 1];
                         }
                     }
                     index -= n;
                 }
 
-                index = three[0][0];
-                var x = three[0][1];
+                index = tree[0][0];
+                var x = tree[0][1];
                 array[j] = x;
-                three[three.Length - array.Length - array.Length % 2 + index] = null;
+                tree[tree.Length - array.Length - array.Length % 2 + index] = null;
             }
         }
     }
