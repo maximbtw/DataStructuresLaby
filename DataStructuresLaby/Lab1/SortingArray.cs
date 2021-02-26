@@ -18,7 +18,7 @@
         /// Метод сортировки выбором
         /// </summary>
         /// <param name="array"></param>
-        public static void ChoiceSort(int[] array)
+        public static void ChoiceSort(int[] array)//n^2
         {
             for (int i = 0; i < array.Length - 1; i++)
             {
@@ -34,18 +34,18 @@
         /// Метод сортировки вставкой
         /// </summary>
         /// <param name="array"></param>
-        public static void InsertionSort(int[] array)
+        public static void InsertionSort(int[] array)//n^2
         {
             for (int i = 1; i < array.Length; i++)
             {
-                int cur = array[i];
+                int current = array[i];
                 int j = i;
-                while (j > 0 && cur < array[j - 1])
+                while (j > 0 && current < array[j - 1])
                 {
                     array[j] = array[j - 1];
                     j--;
                 }
-                array[j] = cur;
+                array[j] = current;
             }
         }
 
@@ -53,11 +53,10 @@
         /// Метод сортировки обменом
         /// </summary>
         /// <param name="array"></param>
-        public static void ExchangeSort(int[] array)
+        public static void ExchangeSort(int[] array)//n^2   
         {
-            var lenght = array.Length;
-            for (var i = 1; i < lenght; i++)
-                for (var j = 0; j < lenght - i; j++)
+            for (var i = 1; i < array.Length; i++)
+                for (var j = 0; j < array.Length - i; j++)
                     if (array[j] > array[j + 1])
                         Swap(ref array[j], ref array[j + 1]);
         }
@@ -66,7 +65,7 @@
         /// Метод сортировки Шелла
         /// </summary>
         /// <param name="array"></param>
-        public static void ShellSort(int[] array)
+        public static void ShellSort(int[] array)//n^2
         {
             var d = array.Length / 2;
             while (d >= 1)
@@ -88,7 +87,7 @@
         /// Метод пирамидальная сортировки
         /// </summary>
         /// <param name="array"></param>
-        public static void PyramidSort(int[] array)
+        public static void PyramidSort(int[] array)//nlog(n)
         {
             var lenght = array.Length;
             for (int i = lenght / 2 - 1; i >= 0; --i)
@@ -131,7 +130,7 @@
         /// Метод быстрой сортировки
         /// </summary>
         /// <param name="array"></param>
-        public static void QuickSort(int[] array)
+        public static void QuickSort(int[] array)//nlog(n)
         {
             QuickSort(array, 0, array.Length - 1);
         }
