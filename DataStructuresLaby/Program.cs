@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace DataStructuresLaby
+﻿namespace DataStructuresLaby
 {
     class Program
     {
         static void Main(string[] args)
         {
-            MainLab1.Start();
+            MainLab2.Start();
         }
     }
 }
