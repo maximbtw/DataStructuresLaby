@@ -10,16 +10,16 @@ namespace DataStructuresLaby
             public Node Left, Right;
         }
 
-        Node head;
+        private Node root;
 
         public void Add(TValue value)
         {
-            if (head == null)
+            if (root == null)
             {
-                head = new Node { Value = value };
+                root = new Node { Value = value };
                 return;
             }
-            Add(head, value);
+            Add(root, value);
         }
 
         private void Add(Node currentNode, TValue value)
@@ -42,73 +42,127 @@ namespace DataStructuresLaby
             }
         }
 
-        public TValue Find(TValue value)
+        public TValue Find(TValue data)
         {
-            Node currentNode = head;
+            Node current = root;
 
-            while (currentNode != null)
+            while (current != null)
             {
-                if (currentNode.Value.CompareTo(value) == 0)
+                var result = current.Value.CompareTo(data);
+                if (result == 0) return current.Value;
+                current = (result < 0)
+                        ? current.Left
+                        : current.Right;
+            }
+
+            return default;
+        }
+
+        public bool Contains(TValue data)
+        {
+            Node current = root;
+
+            while (current != null)
+            {
+                var result = current.Value.CompareTo(data);
+                if (result == 0) return true;
+                current = (result > 0) 
+                    ? current.Left 
+                    : current.Right;
+            }
+
+            return false;  
+        }
+        public void Write() => Write(root);
+
+        private void Write(Node current)
+        {
+            if (current == null) return;
+            Write(current.Left);
+            Console.WriteLine(current.Value.ToString());
+            Write(current.Right);
+        }
+
+        public bool Remove(TValue data)
+        {
+            if (root == null) return false;      
+
+            Node current = root, parent = null;
+
+            int result = current.Value.CompareTo(data);
+            while (result != 0)
+            {
+                if (result > 0)
                 {
-                    return currentNode.Value;
+                    parent = current;
+                    current = current.Left;
                 }
-                currentNode =
-                    currentNode.Value.CompareTo(value) < 0
-                        ? currentNode.Left
-                        : currentNode.Right;
-            }
-
-            throw new Exception("Not Found");
-        }
-
-        public bool Contains(TValue value)
-        {
-            Node currentNode = head;
-
-            while (currentNode != null)
-            {
-                if (value.CompareTo(currentNode.Value) == 0)
+                else if (result < 0)
                 {
-                    return true;
+                    parent = current;
+                    current = current.Right;
                 }
-                currentNode =
-                    value.CompareTo(currentNode.Value) < 0
-                        ? currentNode.Left
-                        : currentNode.Right;
+                if (current == null)
+                    return false;
+                else
+                    result = current.Value.CompareTo(data);
             }
-
-            return false;
-        }
-
-        public void Delete(TValue value)
-        {
-            Delete(head, value);
-        }
-
-        private Node Delete(Node root, TValue value)
-        {
-            if (root == null)
+            if (current.Right == null)
             {
-                return root;
+                if (parent == null)
+                    root = current.Left;
+                else
+                {
+                    result = parent.Value.CompareTo(current.Value);
+                    if (result > 0)
+
+                        parent.Left = current.Left;
+                    else if (result < 0)
+ 
+                        parent.Right = current.Left;
+                }
             }
-            if (root.Value.CompareTo(value) > 0)
-                root.Left = Delete(root.Left, value);
-            else if (root.Value.CompareTo(value) < 0)
-                root.Right = Delete(root.Right, value);
-            else if (root.Left != null && root.Right != null)
+            else if (current.Right.Left == null)
             {
-                root.Right = Delete(root.Right, root.Value);
+                current.Right.Left = current.Left;
+
+                if (parent == null)
+                    root = current.Right;
+                else
+                {
+                    result = parent.Value.CompareTo(current.Value);
+                    if (result > 0)
+                        parent.Left = current.Right;
+                    else if (result < 0)
+                        
+                        parent.Right = current.Right;
+                }
             }
             else
             {
-                if (root.Left != null)
-                    root = root.Left;
-                else if (root.Right != null)
-                    root = root.Right;
+                Node leftmost = current.Right.Left, lmParent = current.Right;
+                while (leftmost.Left != null)
+                {
+                    lmParent = leftmost;
+                    leftmost = leftmost.Left;
+                }
+                lmParent.Left = leftmost.Right;
+                leftmost.Left = current.Left;
+                leftmost.Right = current.Right;
+
+                if (parent == null)
+                    root = leftmost;
                 else
-                    root = null;
+                {
+                    result = parent.Value.CompareTo(current.Value);
+                    if (result > 0)
+                        parent.Left = leftmost;
+                    else if (result < 0)
+                        parent.Right = leftmost;
+                }
             }
-            return root;
+
+            return true;
         }
     }
 }

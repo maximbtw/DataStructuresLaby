@@ -8,22 +8,26 @@ namespace DataStructuresLaby
     {
         public static void Start()
         {
-            int[] array = new int[] { 5,6,7,8,234 };
-
+            var rnd  = new Random();
             var tree = new BinaryTree<int>();
-            foreach (var e in array)
-                tree.Add(e);
+            var list = new List<int>();
 
-            foreach (var e in array)
-                Console.WriteLine(tree.Contains(e));
-
-
-
-            foreach (var e in array)
+            for (int i = 0; i < 15; i++)
             {
-                tree.Remove(e);
-                Console.WriteLine(tree.Contains(e));
+                int item = rnd.Next(-100, 100);
+                list.Add(item);
+                tree.Add(item);
             }
+            tree.Write();
+            Console.WriteLine("-----------");
+            for (int i = 0; i < list.Count; i += 3)
+            {
+                Console.Write(list[i] + " ");
+                tree.Remove(list[i]);
+            }
+            Console.WriteLine();
+            Console.WriteLine("-----------");
+            tree.Write();
         }
     }
 }
