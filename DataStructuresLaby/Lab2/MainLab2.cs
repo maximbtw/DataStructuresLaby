@@ -1,33 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
-namespace DataStructuresLaby
+namespace DataStructuresLaby.Lab2
 {
     class MainLab2
     {
         public static void Start()
         {
-            var rnd  = new Random();
-            var tree = new BinaryTree<int>();
-            var list = new List<int>();
+            var hashTable = new HashTable<string, string>(20);
 
-            for (int i = 0; i < 15; i++)
-            {
-                int item = rnd.Next(-100, 100);
-                list.Add(item);
-                tree.Add(item);
-            }
-            tree.Write();
-            Console.WriteLine("-----------");
-            for (int i = 0; i < list.Count; i += 3)
-            {
-                Console.Write(list[i] + " ");
-                tree.Remove(list[i]);
-            }
-            Console.WriteLine();
-            Console.WriteLine("-----------");
-            tree.Write();
+            hashTable.Add("Hello", "Max");
+            hashTable.Add("GoodBye", "Max");
+            hashTable.Add("Hello", "Artem");
+            hashTable.Add("THX", "Slavy");
+
+            Console.WriteLine(hashTable.Find("Hello"));
+            hashTable.Remove("Hello");
+            Console.WriteLine(hashTable.Find("Hello"));
         }
     }
 }

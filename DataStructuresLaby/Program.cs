@@ -1,4 +1,6 @@
-﻿namespace DataStructuresLaby
+﻿using DataStructuresLaby.Lab2;
+
+namespace DataStructuresLaby
 {
     class Program
     {

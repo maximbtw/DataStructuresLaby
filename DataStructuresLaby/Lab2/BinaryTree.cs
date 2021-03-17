@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataStructuresLaby
+namespace DataStructuresLaby.Lab2
 {
     public class BinaryTree<TValue> where TValue : IComparable<TValue>
     {
