@@ -9,10 +9,10 @@ namespace DataStructuresLaby.Lab2
     {
         public static void Start()
         {
-            long[] array = new long[] { 1, 3, 4, 6, 7, 7, 9, 10,10, 12, 12, 12, 12, 12 };
+            var array = new int[] { 1, 3, 4, 6, 7, 7, 9, 10,10, 12, 12, 12, 12, 12 };
 
-            var index = BinarySearch<long>.FindLeftIndex(array,12);
-            Console.WriteLine(index);
+            var fib = new FibonacciSearch();
+            Console.WriteLine(fib.Search(array, 7));
         }
     }
 }
