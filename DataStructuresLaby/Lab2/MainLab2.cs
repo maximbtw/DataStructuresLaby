@@ -11,8 +11,7 @@ namespace DataStructuresLaby.Lab2
         {
             var array = new int[] { 1, 3, 4, 6, 7, 7, 9, 10,10, 12, 12, 12, 12, 12 };
 
-            var fib = new InterpolationSearch();
-            Console.WriteLine(fib.Search(array, 12));
+            Task8F.Start();
         }
     }
 }
