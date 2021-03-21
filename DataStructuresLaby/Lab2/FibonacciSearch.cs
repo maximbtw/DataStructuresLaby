@@ -2,9 +2,7 @@
 {
     class FibonacciSearch
     {
-        private int index;
-        private int item1;
-        private int item2;
+        private int item2, item1, index;
         private bool stop = false;
 
         private void Init(int[] array)
