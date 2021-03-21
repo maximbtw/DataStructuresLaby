@@ -9,16 +9,10 @@ namespace DataStructuresLaby.Lab2
     {
         public static void Start()
         {
-            var hashTable = new HashTable<string, string>(20);
+            long[] array = new long[] { 1, 3, 4, 6, 7, 7, 9, 10,10, 12, 12, 12, 12, 12 };
 
-            hashTable.Add("Hello", "Max");
-            hashTable.Add("GoodBye", "Max");
-            hashTable.Add("Hello", "Artem");
-            hashTable.Add("THX", "Slavy");
-
-            Console.WriteLine(hashTable.Find("Hello"));
-            hashTable.Remove("Hello");
-            Console.WriteLine(hashTable.Find("Hello"));
+            var index = BinarySearch<long>.FindLeftIndex(array,12);
+            Console.WriteLine(index);
         }
     }
 }
