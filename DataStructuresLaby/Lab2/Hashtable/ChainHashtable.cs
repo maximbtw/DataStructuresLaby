@@ -1,26 +1,17 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Collections;
 
-namespace DataStructuresLaby.Lab2
+namespace DataStructuresLaby.Lab2.Hashtable
 {
-    public class ChainHashtable<TKey, TValue>
+    public class ChainHashtable<TKey, TValue> : Hashtable<TKey, TValue>
     {
         /* Метод цепочек */
 
-        public struct KeyValue<TKey, TValue>
-        {
-            public TKey Key { get; set; }
-            public TValue Value { get; set; }
-        }
-
-        public  readonly int Size;
         private readonly LinkedList<KeyValue<TKey, TValue>>[] items;
 
-        public ChainHashtable(int size)
+        public ChainHashtable(int size) : base(size)
         {
-            this.Size = size;
             items = new LinkedList<KeyValue<TKey, TValue>>[size];
         }
 
@@ -30,7 +21,7 @@ namespace DataStructuresLaby.Lab2
             return Math.Abs(position);
         }
 
-        public TValue Find(TKey key)
+        public override TValue Find(TKey key)
         {
             var position = GetArrayPosition(key);
             var linkedList = GetLinkedList(position);
@@ -38,7 +29,7 @@ namespace DataStructuresLaby.Lab2
             return linkedList.FirstOrDefault(x => x.Key.Equals(key)).Value;
         }
 
-        public void Add(TKey key, TValue value)
+        public override void Add(TKey key, TValue value)
         {
             var position = GetArrayPosition(key);
             var linkedList = GetLinkedList(position);
@@ -46,7 +37,7 @@ namespace DataStructuresLaby.Lab2
             linkedList.AddLast(item);
         }
 
-        public void Remove(TKey key)
+        public override void Remove(TKey key)
         {
             var position   = GetArrayPosition(key);
             var linkedList = GetLinkedList(position);

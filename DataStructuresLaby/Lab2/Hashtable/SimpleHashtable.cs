@@ -1,23 +1,15 @@
 ﻿using System;
 
-namespace DataStructuresLaby.Lab2
+namespace DataStructuresLaby.Lab2.Lab2.Hashtable
 {
-    class SimpleHashtable<TKey, TValue>
+    class SimpleHashtable<TKey, TValue> : Hashtable<TKey, TValue>
     {
         /* Простое рехеширование */
 
-        public struct KeyValue<TKey, TValue>
-        {
-            public TKey Key { get; set; }
-            public TValue Value { get; set; }
-        }
-
-        public readonly int Size;
         private KeyValue<TKey, TValue>[] items;
 
-        public SimpleHashtable(int size)
+        public SimpleHashtable(int size) : base(size)
         {
-            this.Size = size;
             items = new KeyValue<TKey, TValue>[size];
         }
 
@@ -27,20 +19,20 @@ namespace DataStructuresLaby.Lab2
             return Math.Abs(position);
         }
 
-        public TValue Find(TKey key)
+        public override TValue Find(TKey key)
         {
             var position = GetArrayPosition(key);
 
             return items[position].Value;
         }
 
-        public void Add(TKey key, TValue value)
+        public override void Add(TKey key, TValue value)
         {
             var position = GetArrayPosition(key);
             items[position] = new KeyValue<TKey, TValue>() { Key = key, Value = value };
         }
 
-        public void Remove(TKey key)
+        public override void Remove(TKey key)
         {
             var position = GetArrayPosition(key);
 

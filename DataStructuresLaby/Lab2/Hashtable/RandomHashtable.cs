@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DataStructuresLaby.Lab2
+namespace DataStructuresLaby.Lab2.Lab2.Hashtable
 {
-    class RandomHashtable<TKey, TValue>
+    class RandomHashtable<TKey, TValue> : Hashtable<TKey, TValue>
     {
         /* Рехэширование с помощью псевдослучайных чисел */
 
@@ -12,18 +10,10 @@ namespace DataStructuresLaby.Lab2
         private readonly int c = 6571;
         private readonly int m = 31104;
 
-        public struct KeyValue<TKey, TValue>
-        {
-            public TKey Key { get; set; }
-            public TValue Value { get; set; }
-        }
-
-        public readonly int Size;
         private KeyValue<TKey, TValue>[] items;
 
-        public RandomHashtable(int size)
+        public RandomHashtable(int size) : base(size)
         {
-            this.Size = size;
             items = new KeyValue<TKey, TValue>[size];
         }
 
@@ -40,19 +30,19 @@ namespace DataStructuresLaby.Lab2
             return Math.Abs(position);
         }
 
-        public TValue Find(TKey key)
+        public override TValue Find(TKey key)
         {
             var position = GetArrayPosition(key);
             return items[position].Value;
         }
 
-        public void Add(TKey key, TValue value)
+        public override void Add(TKey key, TValue value)
         {
             var position = GetArrayPosition(key, false);
             items[position] = new KeyValue<TKey, TValue>() { Key = key, Value = value };
         }
 
-        public void Remove(TKey key)
+        public override void Remove(TKey key)
         {
             var position = GetArrayPosition(key);
             items[position] = default(KeyValue<TKey, TValue>);
