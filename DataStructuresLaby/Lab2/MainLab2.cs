@@ -24,18 +24,18 @@ namespace DataStructuresLaby.Lab2
             //    Console.WriteLine(hashTable.Find(i));
             //}
 
-            var array = CreateArray(1000);
-            var findItem = array[200];
+
+
+            var array = CreateArray(1000000);
+            var findItem = array[68873];
             Console.WriteLine($"Ищем: {findItem}");
 
-            int index = Array.FindIndex(array.OrderBy(x=>x).ToArray(), (item) => item == findItem);
-            Console.WriteLine(index);
 
-
-            //GetTime("Встроенный поиск", Array.FindIndex<int>, array.ToArray(), findItem);
+            GetTime("Встроенный поиск", Array.FindIndex, array.ToArray(),(Predicate<int>)((item) => item == findItem));
             GetTime("Бинарный поиск",             BinarySearch<int>.Search,     array.ToArray(), findItem);
             GetTime("Фибоначчиев поиск",      new FibonacciSearch().Search,     array.ToArray(), findItem);
             GetTime("Интерполяционный поиск", new InterpolationSearch().Search, array.ToArray(), findItem);
+            Console.WriteLine("\nКонец");
         }
 
         public static int[] CreateArray(int size)
@@ -43,12 +43,12 @@ namespace DataStructuresLaby.Lab2
             int[] array = new int[size];
             var rnd = new Random();
             for (int i = 0; i < array.Length; i++)
-                array[i] = rnd.Next();
+                array[i] = rnd.Next(0,10000);
 
             return array;
         }
 
-        public static void GetTime(string nameFunc, Func< int[], int, int> func, int[] array, int element)
+        public static void GetTime<T>(string nameFunc, Func<int[], T, int> func, int[] array, T element)
         {
             Stopwatch timer = new Stopwatch();
 
@@ -57,7 +57,8 @@ namespace DataStructuresLaby.Lab2
             var index = func(array, element);
             timer.Stop();
 
-            Console.WriteLine($"Индекс: {index}");
+            Console.WriteLine();
+            Console.WriteLine($"Индекс: {index} число: {array[index]}");
             Console.WriteLine($"{nameFunc} - время поиска: {timer.Elapsed.TotalMilliseconds} мс.");
         }
     }
