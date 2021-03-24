@@ -1,4 +1,4 @@
-﻿namespace DataStructuresLaby.Lab2
+﻿namespace DataStructuresLaby.Lab2.Search
 {
     class InterpolationSearch
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataStructuresLaby.Lab2
+namespace DataStructuresLaby.Lab2.Search
 {
     class BinarySearch<TValue> where TValue : IComparable
     {
