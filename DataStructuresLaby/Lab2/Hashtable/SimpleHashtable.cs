@@ -22,7 +22,6 @@ namespace DataStructuresLaby.Lab2.Lab2.Hashtable
         public override TValue Find(TKey key)
         {
             var position = GetArrayPosition(key);
-
             return items[position].Value;
         }
 
@@ -35,7 +34,6 @@ namespace DataStructuresLaby.Lab2.Lab2.Hashtable
         public override void Remove(TKey key)
         {
             var position = GetArrayPosition(key);
-
             items[position] = default(KeyValue<TKey, TValue>);
         }
     }

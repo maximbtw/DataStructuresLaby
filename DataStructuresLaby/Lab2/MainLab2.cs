@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Diagnostics;
+using DataStructuresLaby.Lab2.Hashtable;
+using DataStructuresLaby.Lab2.Search;
 
 namespace DataStructuresLaby.Lab2
 {
