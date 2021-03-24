@@ -1,4 +1,5 @@
-﻿using DataStructuresLaby.Lab2;
+﻿using DataStructuresLaby.Lab1;
+using DataStructuresLaby.Lab2;
 
 namespace DataStructuresLaby
 {

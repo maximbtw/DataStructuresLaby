@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace DataStructuresLaby
+namespace DataStructuresLaby.Lab1
 {
     class SortingArray
     {

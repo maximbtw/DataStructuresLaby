@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataStructuresLaby
+namespace DataStructuresLaby.Lab1
 {
     public class Matrix
     {

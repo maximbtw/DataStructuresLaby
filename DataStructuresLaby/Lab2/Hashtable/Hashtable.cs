@@ -1,4 +1,4 @@
-﻿namespace DataStructuresLaby.Lab2.Lab2.Hashtable
+﻿namespace DataStructuresLaby.Lab2.Hashtable
 {
     abstract public class Hashtable<TKey, TValue>
     {

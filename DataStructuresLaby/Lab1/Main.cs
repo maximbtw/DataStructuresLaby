@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DataStructuresLaby
+namespace DataStructuresLaby.Lab1
 {
-    class MainLab1
+    class Main
     {
         public static void Start()
         {

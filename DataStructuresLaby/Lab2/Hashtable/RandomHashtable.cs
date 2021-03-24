@@ -17,18 +17,17 @@ namespace DataStructuresLaby.Lab2.Lab2.Hashtable
             items = new KeyValue<TKey, TValue>[size];
         }
 
-        protected int GetArrayPosition(TKey key, bool take = true)
+        protected int GetArrayPosition(TKey key)
         {
-            int x = key.GetHashCode();
-            int position = GetHash(x) % Size;
-            while (!items[position].Equals(default(KeyValue<TKey, TValue>)) && !take)
-            {
-                x = GetHash(x);
-                position = GetHash(x);
-            }
-
+            int position = (key.GetHashCode() + GetRandomHash(1)) % Size;
             return Math.Abs(position);
         }
+
+        private int GetRandomHash(int x)
+        {
+            return (625 * x + 6571) % 31104;
+        }
+
 
         public override TValue Find(TKey key)
         {
@@ -38,7 +37,7 @@ namespace DataStructuresLaby.Lab2.Lab2.Hashtable
 
         public override void Add(TKey key, TValue value)
         {
-            var position = GetArrayPosition(key, false);
+            var position = GetArrayPosition(key);
             items[position] = new KeyValue<TKey, TValue>() { Key = key, Value = value };
         }
 
@@ -47,7 +46,5 @@ namespace DataStructuresLaby.Lab2.Lab2.Hashtable
             var position = GetArrayPosition(key);
             items[position] = default(KeyValue<TKey, TValue>);
         }
-
-        private int GetHash(int x) => (a * x + c) % Size;
     }
 }
