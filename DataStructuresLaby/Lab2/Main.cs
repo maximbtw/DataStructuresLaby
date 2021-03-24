@@ -8,7 +8,7 @@ using DataStructuresLaby.Lab2.Search;
 
 namespace DataStructuresLaby.Lab2
 {
-    class MainLab2
+    class Main
     {
         public static void Start()
         {

@@ -1,13 +1,11 @@
-﻿using DataStructuresLaby.Lab1;
-using DataStructuresLaby.Lab2;
-
-namespace DataStructuresLaby
+﻿namespace DataStructuresLaby
 {
     class Program
     {
         static void Main(string[] args)
         {
-            MainLab2.Start();
+            //Lab1.Main.Start();
+            Lab2.Main.Start();
         }
     }
 }
