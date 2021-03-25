@@ -10,7 +10,7 @@ namespace DataStructuresLaby.Lab2
 {
     class Main
     {
-        private static readonly int size = 50000;
+        private static readonly int size = 10;
 
         public static void Start()
         {
@@ -25,19 +25,19 @@ namespace DataStructuresLaby.Lab2
 
             FillCollections(array, tree, hashtables);
 
-            var findItem = array[38256];
-            Console.WriteLine($"Ищем элемент: {findItem}");
+            var findElement = array[9];
+            Console.WriteLine($"Ищем элемент: {findElement}");
 
+            GetTimeFindMethod("Встроенный поиск", Array.FindIndex, array.ToArray(), (Predicate<int>)((item) => item == findElement));
+            GetTimeFindMethod("Бинарный поиск",             BinarySearch<int>.Search,     array.ToArray(), findElement);
+            GetTimeFindMethod("Фибоначчиев поиск",      new FibonacciSearch().Search,     array.ToArray(), findElement);
+            GetTimeFindMethod("Интерполяционный поиск", new InterpolationSearch().Search, array.ToArray(), findElement);
+            GetTimeBinaryTree(tree, findElement);
 
-
-            GetTime("Встроенный поиск", Array.FindIndex, array.ToArray(), (Predicate<int>)((item) => item == findItem));
-            GetTime("Бинарный поиск",             BinarySearch<int>.Search,     array.ToArray(), findItem);
-            GetTime("Фибоначчиев поиск",      new FibonacciSearch().Search,     array.ToArray(), findItem);
-            GetTime("Интерполяционный поиск", new InterpolationSearch().Search, array.ToArray(), findItem);
             Console.WriteLine("\nКонец");
         }
 
-        public static void FillCollections(int[] array, BinaryTree<int> tree, Hashtable<int, int>[] hashtables)
+        private static void FillCollections(int[] array, BinaryTree<int> tree, Hashtable<int, int>[] hashtables)
         {
             var rnd = new Random();
 
@@ -51,7 +51,22 @@ namespace DataStructuresLaby.Lab2
             }
         }
 
-        public static void GetTime<T>(string nameFunc, Func<int[], T, int> func, int[] array, T element)
+
+
+        private static void GetTimeBinaryTree<T>(BinaryTree<T> tree, T element) where T : IComparable<T>
+        {
+            Stopwatch timer = new Stopwatch();
+
+            timer.Start();
+            var findItem = tree.Find(element);
+            timer.Stop();
+
+            Console.WriteLine();
+            Console.WriteLine($"Элемент: {findItem}");
+            Console.WriteLine($"Бинарное дерево - время поиска: {timer.Elapsed.TotalMilliseconds} мс.");
+        }
+
+        private static void GetTimeFindMethod<T>(string nameFunc, Func<int[], T, int> func, int[] array, T element)
         {
             Stopwatch timer = new Stopwatch();
 

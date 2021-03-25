@@ -50,7 +50,7 @@ namespace DataStructuresLaby.Lab2
             {
                 var result = current.Value.CompareTo(data);
                 if (result == 0) return current.Value;
-                current = (result < 0)
+                current = (result > 0)
                         ? current.Left
                         : current.Right;
             }
