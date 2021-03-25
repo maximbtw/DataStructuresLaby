@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Collections.Generic;   
 using System.Linq;
 using System.Diagnostics;
 using DataStructuresLaby.Lab2.Hashtable;
@@ -10,7 +9,7 @@ namespace DataStructuresLaby.Lab2
 {
     class Main
     {
-        private static readonly int size = 5000000;
+        private static readonly int size = 1000000;
 
         public static void Start()
         {
@@ -18,8 +17,8 @@ namespace DataStructuresLaby.Lab2
             var tree = new BinaryTree<int>();
             var hashtables = new Dictionary<string, Hashtable<int,int>>
             {
-                ["Простое рехещирование"] = new SimpleHashtable<int,int>(size),
                 ["Рехэширование с помощью псевдослучайных чисел"] = new RandomHashtable<int, int>(size),
+                ["Простое рехещирование"] = new SimpleHashtable<int,int>(size),
                 ["Метод цепочек"] = new ChainHashtable<int, int>(size),
             };
 
@@ -60,39 +59,44 @@ namespace DataStructuresLaby.Lab2
         {
             Stopwatch timer = new Stopwatch();
 
+            //hashtable.Find(findKey);
             timer.Start();
             var findItem = hashtable.Find(findKey);
             timer.Stop();
 
-            Console.WriteLine();
-            Console.WriteLine($"Элемент: {findItem}");
-            Console.WriteLine($"{name} - время поиска: {timer.Elapsed.TotalMilliseconds} мс.");
+            SendResult(name, timer.Elapsed.TotalMilliseconds, findItem);
         }
 
         private static void GetTimeBinaryTree<T>(BinaryTree<T> tree, T element) where T : IComparable<T>
         {
             Stopwatch timer = new Stopwatch();
 
+            //tree.Find(element);
             timer.Start();
             var findItem = tree.Find(element);
             timer.Stop();
 
-            Console.WriteLine();
-            Console.WriteLine($"Элемент: {findItem}");
-            Console.WriteLine($"Бинарное дерево - время поиска: {timer.Elapsed.TotalMilliseconds} мс.");
+            SendResult("Бинарное дерево", timer.Elapsed.TotalMilliseconds, findItem);
         }
 
         private static void GetTimeFindMethod<T>(string nameFunc, Func<int[], T, int> func, int[] array, T element)
         {
             Stopwatch timer = new Stopwatch();
+
+            //func(array, element);
             timer.Start();
-            //Array.Sort(array);
             var index = func(array, element);
             timer.Stop();
 
+            SendResult(nameFunc, timer.Elapsed.TotalMilliseconds, array[index], index);
+        }
+
+        private static void SendResult<T>(string name, double time, T element, int index = -1)
+        {
             Console.WriteLine();
-            Console.WriteLine($"Индекс: {index} число: {array[index]}");
-            Console.WriteLine($"{nameFunc} - время поиска: {timer.Elapsed.TotalMilliseconds} мс.");
+            Console.WriteLine($"Найден элемент: {element}");
+            if (index != -1) Console.WriteLine($"Под индексом: {index}");
+            Console.WriteLine($"{name} - время поиска: {time} мс.");
         }
     }
 }
