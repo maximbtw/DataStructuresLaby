@@ -6,14 +6,14 @@ namespace DataStructuresLaby.Lab2.Hashtable
     {
         /* Простое рехеширование */
 
-        private KeyValue<TKey, TValue>[] items;
+        protected KeyValue<TKey, TValue>[] items;
 
         public SimpleHashtable(int size) : base(size)
         {
             items = new KeyValue<TKey, TValue>[size];
         }
 
-        protected int GetArrayPosition(TKey key)
+        protected virtual int GetArrayPosition(TKey key)
         {
             int position = key.GetHashCode() % Size;
             return Math.Abs(position);
@@ -28,9 +28,12 @@ namespace DataStructuresLaby.Lab2.Hashtable
         public override void Add(TKey key, TValue value)
         {
             var position = GetArrayPosition(key);
-            if (items[position].Equals(default(KeyValue<TKey, TValue>)))
+            if (!items[position].Key.Equals(default(TKey)))
             {
-                throw new Exception("Ключ должен быть уникальный");
+                //Console.WriteLine(items[position].Key);
+                //Console.WriteLine($"Ключ: {key} хеш: {position} значение: {value}");
+                return;
+                //throw new Exception("Ключ должен быть уникальный");
             }
             items[position] = new KeyValue<TKey, TValue>() { Key = key, Value = value };
         }

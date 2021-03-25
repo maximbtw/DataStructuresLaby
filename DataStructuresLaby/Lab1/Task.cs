@@ -17,7 +17,7 @@ namespace DataStructuresLaby.Lab1
 
                 if (result.Count < 2) result.Add(digit);
 
-                if()
+                //if()
             }
 
             return result.Sum(x => x);
