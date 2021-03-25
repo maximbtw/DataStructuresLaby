@@ -11,11 +11,21 @@ namespace DataStructuresLaby.Lab2.Hashtable
         protected override int GetArrayPosition(TKey key)
         {
             int x = key.GetHashCode();
-            int position = (x + GetRandomHash(x)) % Size;
+            int position = GetRandomHash(x);
+            int startHash = position;
+            int counter = 0;
+
+            while (!items[position].Key.Equals(default(TKey)))
+            {
+                if (startHash == position) break;//Таблица заполнена
+                position = GetRandomHash(position);
+                counter++;
+            }
+
             return Math.Abs(position);
         }
 
         private int GetRandomHash(int x) 
-            => (625 * x + 6571) % 31104;
+            => x + ((625 * x + 6571) % 31104) % Size;
     }
 }
