@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataStructuresLaby.Lab2.Lab2.Hashtable
+namespace DataStructuresLaby.Lab2.Hashtable
 {
     class SimpleHashtable<TKey, TValue> : Hashtable<TKey, TValue>
     {
@@ -28,6 +28,10 @@ namespace DataStructuresLaby.Lab2.Lab2.Hashtable
         public override void Add(TKey key, TValue value)
         {
             var position = GetArrayPosition(key);
+            if (items[position].Equals(default(KeyValue<TKey, TValue>)))
+            {
+                throw new Exception("Ключ должен быть уникальный");
+            }
             items[position] = new KeyValue<TKey, TValue>() { Key = key, Value = value };
         }
 
