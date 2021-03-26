@@ -9,28 +9,29 @@ namespace DataStructuresLaby.Lab2
 {
     class Main
     {
-        private static readonly int size = 1000000;
+        private static readonly int size = 5000;
 
         public static void Start()
         {
+            //Task8F.Start();
             var array = new int[size];
             var tree = new BinaryTree<int>();
-            var hashtables = new Dictionary<string, Hashtable<int,int>>
+            var hashtables = new Dictionary<string, Hashtable<int, int>>
             {
                 ["Рехэширование с помощью псевдослучайных чисел"] = new RandomHashtable<int, int>(size),
-                ["Простое рехещирование"] = new SimpleHashtable<int,int>(size),
+                ["Простое рехещирование"] = new SimpleHashtable<int, int>(size),
                 ["Метод цепочек"] = new ChainHashtable<int, int>(size),
             };
 
             FillCollections(array, tree, hashtables);
             Array.Sort(array);
 
-            var findElement = array[538345];
+            var findElement = array[1];
             Console.WriteLine($"Ищем элемент: {findElement}");
 
             GetTimeFindMethod("Встроенный поиск", Array.FindIndex, array.ToArray(), (Predicate<int>)((item) => item == findElement));
-            GetTimeFindMethod("Бинарный поиск",             BinarySearch<int>.Search,     array.ToArray(), findElement);
-            GetTimeFindMethod("Фибоначчиев поиск",      new FibonacciSearch().Search,     array.ToArray(), findElement);
+            GetTimeFindMethod("Бинарный поиск", BinarySearch<int>.Search, array.ToArray(), findElement);
+            GetTimeFindMethod("Фибоначчиев поиск", new FibonacciSearch().Search, array.ToArray(), findElement);
             GetTimeFindMethod("Интерполяционный поиск", new InterpolationSearch().Search, array.ToArray(), findElement);
             GetTimeBinaryTree(tree, findElement);
 
